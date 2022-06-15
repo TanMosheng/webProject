@@ -59,7 +59,7 @@ body {
     width: 100%;
 }
 
-.container_from {
+.container_form {
     height: 100%;
     position: absolute;
     top: 0;
@@ -203,7 +203,7 @@ input:focus {
 }
 
 /* 登录表单 */
-.from {
+.form {
     background-color: var(--white);
     display: flex;
     align-items: center;
