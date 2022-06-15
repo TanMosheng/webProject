@@ -28,10 +28,10 @@ body{
 <br/>
 <br/>
 <h1>欢迎进入学生信息管理系统</h1>
-<h4>（4秒后自动跳转）<a href="./登录界面.html">点击立即进入</a></h4>
+<h4>（5秒后自动跳转）<a href="./登录界面.html">点击立即进入</a></h4>
 </div>
 <script language="javascript" type="text/javascript">
-setTimeout("javascript:location.href='./登录界面.html'", 4000);
+setTimeout("javascript:location.href='./登录界面.html'", 5000);
 </script>
 
 </body>
