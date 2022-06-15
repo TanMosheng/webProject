@@ -29,21 +29,28 @@ body {
     place-items: center;
 }
 
-.from_title {
-    font-weight: 300;
+.form_title {
+    font-weight: 500;
     margin: 0;
     margin-bottom: 1.25rem;
 }
 
 .link {
-    color: rgb(113, 149, 212);
+    color: rgb(132, 172, 241);
+    font-size: 0.9rem;
+    margin: 1rem 0 0 0;
+    text-decoration: none;
+}
+
+.err_tip {
+    color: rgb(238, 62, 56);
     font-size: 0.9rem;
     margin: 1rem 0 0 0;
     text-decoration: none;
 }
 
 .link:hover {
-    color: rgb(90, 105, 238);
+    color: rgb(63, 81, 244);
     text-decoration: underline;
 }
 
