@@ -1,14 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>登录注册界面</title>
-    <link rel="stylesheet" href="../styles/登录界面.css">
-    <script defer="true" src="../scripts/登录界面切换.js"></script>
+    <link rel="stylesheet" href="./styles/登录界面.css">
+    <script defer="true" src="./scripts/登录界面切换.js"></script>
 </head>
+
+
+<?php
+function isLogInfoCorrect($username, $password)
+{
+    return $username == 'admin' && $password == 'admin';
+}
+?>
+
+<?php
+$logfail = false;
+$logsuccess = false;
+if (!empty($_POST['username'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    if (isLogInfoCorrect($username, $password)) {
+        $logsuccess = true;
+    } else {
+        $logfail = true;
+    }
+}
+?>
 
 <body>
     <!-- 整体布局 -->
@@ -16,7 +38,7 @@
 
         <!-- 教师登录框 -->
         <div class="container_form container_signup">
-            <form action="../PHP/login.php" class="form" id="teacherform" method="post">
+            <form action="登录界面.php" class="form" id="teacherform" method="post">
                 <h1 class="form_title">欢迎登录</h1>
                 <input type="text" name="username" placeholder="工号" class="input" required="">
                 <input type="password" name="password" placeholder="密码" class="input" required="">
@@ -27,13 +49,14 @@
                 <div>
                     <span><a href="./学生注册页面.html" class="link">立即注册</a></span>
                 </div>
-                <input class="btn" type="submit" value="登录"> 
+                <input class="btn" type="submit" value="登录">
+                <?php if ($logfail) echo '<div class="err_tip">账号或密码错误，请重试</div>' ?>
             </form>
         </div>
 
         <!-- 学生登录框 -->
         <div class="container_form container_signin">
-            <form action="../PHP/login.php" class="form" id="studentform" method="post">
+            <form action="登录界面.php" class="form" id="studentform" method="post">
                 <h1 class="form_title">欢迎登录</h1>
                 <input type="text" name="username" placeholder="学号" class="input" required="">
                 <input type="password" name="password" placeholder="密码" class="input" required="">
@@ -44,7 +67,8 @@
                 <div>
                     <span><a href="./学生注册页面.html" class="link">立即注册</a></span>
                 </div>
-                <input class="btn" type="submit" value="登录"> 
+                <input class="btn" type="submit" value="登录">
+                <?php if ($logfail) echo '<div class="err_tip">账号或密码错误，请重试</div>' ?>
             </form>
         </div>
 
@@ -60,5 +84,21 @@
             </div>
         </div>
     </div>
+    <?php
+    if ($logsuccess) {
+        $identity = $_POST['identity'];
+        $username = $_POST['username'];
+        echo <<<_GOTO_HOMEPAGE_END
+    <form id="loginForm" action="home.php">
+      <input type="hidden" name="identity" value="$identity">
+      <input type="hidden" name="username" value="$username">
+    </form>
+    <script type="text/javascript">
+      document.getElementById("loginForm").submit();
+    </script>
+_GOTO_HOMEPAGE_END;
+    }
+    ?>
 </body>
+
 </html>
