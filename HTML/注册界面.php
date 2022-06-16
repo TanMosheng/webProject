@@ -20,34 +20,14 @@
         background-size: cover;
     }
 
-    .btn {
-        background-color: yellow;
-        background-image: linear-gradient(to right, rgb(238, 178, 113), rgb(252, 238, 117) 65%);
-        border-radius: 5px;
-        margin: 0px;
-        border: 1px solid skyblue;
-        color: #222831;
-        cursor: pointer;
-        font-size: 0.8rem;
-        font-weight: bold;
-        letter-spacing: 0.1rem;
-        padding: 0.5rem 1.8rem;
-        /* 过渡的时间还有样式 */
-        text-transform: uppercase;
-        transition: transform 80ms ease-in;
 
-    }
-
-    .btn:hover {
-        transform: scale(0.9);
-    }
 
     .W {
         text-align: center;
         width: 600px;
         height: 300px;
         position: relative;
-        left: 35%;
+        left: 34%;
     }
 
     .wrap {
@@ -76,7 +56,7 @@
         width: 180px;
     }
 
-    .input {
+    .in {
         background-color: #fff;
         border: 1px solid white;
         padding: 0.9rem 0.9rem;
@@ -86,15 +66,38 @@
     }
 
     /* 设置点击没有边框 */
-    .input:focus {
+    .in:focus {
         outline: none;
         border: 1px solid orange;
+    }
+
+    .btn {
+        background-color: yellow;
+        background-image: linear-gradient(to right, rgb(238, 178, 113), rgb(252, 238, 117) 65%);
+        border-radius: 5px;
+        border: 1px solid skyblue;
+        color: #222831;
+        cursor: pointer;
+        font-size: 0.8rem;
+        font-weight: bold;
+        left: 300px;
+        letter-spacing: 0.1rem;
+        left: 50%;
+        position: inherit;
+        padding: 0.5rem 1.8rem;
+        /* 过渡的时间还有样式 */
+        text-transform: uppercase;
+        transition: transform 80ms ease-in;
+    }
+
+    .btn:hover {
+        transform: scale(0.9);
     }
 </style>
 
 <body>
     <div class="W">
-        <br><br><br><br>
+        <br><br><br>
         <strong>
             <h1>用户注册</h1>
         </strong>
@@ -104,50 +107,50 @@
                     <label>
                         学工号：
                     </label>
-                    <input class="input" type="text" name="userNo" pattern="[0-9]" placeholder="请输入学工号" required="">
+                    <input class="in" type="text" name="userNo" pattern="[0-9]" placeholder="请输入学工号" required="">
                 </div>
                 <br><br>
                 <div class="item">
                     <label>
                         姓名：
                     </label>
-                    <input class="input" type="text" name="name" placeholder="请输入姓名" required="">
+                    <input class="in" type="text" name="name" placeholder="请输入姓名" required="">
                 </div>
                 <br><br>
                 <div class="item">
-                    <label>
-                        性别：
-                    </label>
+                    <p1>性别：</p1>
                     <input type="radio" name="gender" value="M" checked="true"> 男 <input type="radio" name="gender" value="F"> 女
                 </div>
                 <div class="item">
                     <label>
                         密码：
                     </label>
-                    <input class="input" type="password" name="password" placeholder="请输入密码" required="">
+                    <input class="in" type="password" name="password" placeholder="请输入密码" required="">
                 </div>
                 <br><br>
                 <div class="item">
                     <label>
                         再次输入密码：
                     </label>
-                    <input class="input" type="password" name="password" placeholder="请确认密码" required="">
+                    <input class="in" type="password" name="password" placeholder="请确认密码" required="">
                 </div>
                 <br><br>
                 <div class="item">
                     <label>
                         电话号码：
                     </label>
-                    <input class="input" type="phone" name="phone" pattern="[0-9]{11}" placeholder="请输入11位电话号码">
+                    <input class="in" type="phone" name="phone" pattern="[0-9]{11}" placeholder="请输入11位电话号码">
                 </div>
                 <br><br>
                 <div class="item">
-                    <label>
-                        身份：
-                    </label>
+                    <p1>&emsp;&emsp;身份：</p1>
                     <input type="radio" name="userType" value="S" checked="true"> 学生 <input type="radio" name="userType" value="T"> 老师
                 </div>
-                <input class="btn" type="submit" value="提交">
+                <div class="item">
+                    <p1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</p1>
+                    <input class="btn" type="submit" value="提交">
+                    <input class="btn" type="reset" value="重置">
+                </div>
             </form>
         </div>
     </div>
