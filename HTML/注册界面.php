@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>注册页面</title>
+    <title>注册界面</title>
 </head>
 <style>
     :root {
@@ -20,7 +20,31 @@
         background-size: cover;
     }
 
+    input::-ms-input-placeholder {
+        text-align: center;
+        color: red;
+        font-weight: bold;
+    }
 
+    input::-webkit-input-placeholder {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    option {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    label {
+        font-size: 16px;
+        width: 150px;
+        height: 2em;
+        display: inline-block;
+        text-align: right;
+        padding-right: 5px;
+        font-weight: bold;
+    }
 
     .W {
         text-align: center;
@@ -42,16 +66,6 @@
         height: 30px;
     }
 
-    label {
-        font-size: 16px;
-        width: 150px;
-        height: 2em;
-        display: inline-block;
-        text-align: right;
-        padding-right: 5px;
-        font-weight: bold;
-    }
-
     .top {
         width: 180px;
     }
@@ -59,10 +73,11 @@
     .in {
         background-color: #fff;
         border: 1px solid white;
-        padding: 0.9rem 0.9rem;
+        padding: 0.9rem 0;
         margin: 0.5rem 0;
         width: 200px;
-        border-radius: 20px;
+        border-radius: 10px;
+        text-align: center;
     }
 
     /* 设置点击没有边框 */
@@ -97,17 +112,17 @@
 
 <body>
     <div class="W">
-        <br><br><br>
+        <br><br><br><br>
         <strong>
             <h1>用户注册</h1>
         </strong>
         <div class="wrap">
-            <form action="#" method="post">
+            <form action="#" method="get">
                 <div class="item">
                     <label>
                         学工号：
                     </label>
-                    <input class="in" type="text" name="userNo" pattern="[0-9]" placeholder="请输入学工号" required="">
+                    <input class="in" type="text" name="userNo" pattern="[0-9]{8}  placeholder="请输入学工号" required="">
                 </div>
                 <br><br>
                 <div class="item">
@@ -118,9 +133,15 @@
                 </div>
                 <br><br>
                 <div class="item">
-                    <p1>性别：</p1>
-                    <input type="radio" name="gender" value="M" checked="true"> 男 <input type="radio" name="gender" value="F"> 女
+                    <label>
+                        性别：
+                    </label>
+                    <select class="in" name="sex">
+                        <option value="M">男</option>
+                        <option value="W">女</option>
+                    </select>
                 </div>
+                <br><br>
                 <div class="item">
                     <label>
                         密码：
@@ -139,18 +160,24 @@
                     <label>
                         电话号码：
                     </label>
-                    <input class="in" type="phone" name="phone" pattern="[0-9]{11}" placeholder="请输入11位电话号码">
+                    <input class="in" type="phone" name="phone" pattern="^(13[0-9]|15[0-9]|18[0-9])([0-9]{8})$" placeholder="请输入11位电话号码">
                 </div>
                 <br><br>
                 <div class="item">
-                    <p1>&emsp;&emsp;身份：</p1>
-                    <input type="radio" name="userType" value="S" checked="true"> 学生 <input type="radio" name="userType" value="T"> 老师
+                    <label>
+                        身份：
+                    </label>
+                    <select class="in" name="sex">
+                        <option value="T">教师</option>
+                        <option value="S">学生</option>
+                    </select>
                 </div>
+                <br><br>
                 <div class="item">
-                    <p1>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</p1>
                     <input class="btn" type="submit" value="提交">
                     <input class="btn" type="reset" value="重置">
                 </div>
+                <br><br>
             </form>
         </div>
     </div>
