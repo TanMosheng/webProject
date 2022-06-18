@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh_CN">
 
 <head>
     <meta charset="UTF-8">
@@ -117,12 +117,12 @@
             <h1>用户注册</h1>
         </strong>
         <div class="wrap">
-            <form action="#" method="get">
+            <form action="注册界面.php" method="POST">
                 <div class="item">
                     <label>
                         学工号：
                     </label>
-                    <input class="in" type="text" name="userNo" pattern="[0-9]{8}  placeholder="请输入学工号" required="">
+                    <input class="in" type="text" name="userName" pattern="[0-9]{8}" placeholder="请输入学工号" required="">
                 </div>
                 <br><br>
                 <div class="item">
@@ -136,9 +136,9 @@
                     <label>
                         性别：
                     </label>
-                    <select class="in" name="sex">
+                    <select class="in" name="gender">
                         <option value="M">男</option>
-                        <option value="W">女</option>
+                        <option value="F">女</option>
                     </select>
                 </div>
                 <br><br>
@@ -153,7 +153,7 @@
                     <label>
                         再次输入密码：
                     </label>
-                    <input class="in" type="password" name="password" placeholder="请确认密码" required="">
+                    <input class="in" type="password" name="password1" placeholder="请确认密码" required="">
                 </div>
                 <br><br>
                 <div class="item">
@@ -167,13 +167,14 @@
                     <label>
                         身份：
                     </label>
-                    <select class="in" name="sex">
-                        <option value="T">教师</option>
+                    <select class="in" name="userType">
                         <option value="S">学生</option>
+                        <option value="T">教师</option>
                     </select>
                 </div>
                 <br><br>
                 <div class="item">
+                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                     <input class="btn" type="submit" value="提交">
                     <input class="btn" type="reset" value="重置">
                 </div>
@@ -184,3 +185,59 @@
 </body>
 
 </html>
+
+<?php
+session_start();
+$server = "localhost";
+$db_username = "web2022";
+$db_passwd = "123456";
+$dbname = "web2022";
+//连接数据库
+$conn =  mysqli_connect($server, $db_username, $db_passwd, $dbname);
+// 检测连接
+if ($conn->connect_error) {
+    die("连接失败: " . $conn->connect_error);
+}
+
+if (!empty($_POST['userName'])) {
+    $userName = $_POST['userName'];
+    $password = $_POST['password'];
+    $name = $_POST['name'];
+    $gender = $_POST['gender'];
+    $phone = $_POST['phone'];
+    $userType = $_POST['userType'];
+
+    $sql = "select userName from user where userName = '$userName'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    //判断用户名是否存在
+    if ($userName != $row['userName']) {
+        //用户名不存在 将注册的账号密码加入数据库
+        if ($password != $_POST['password1']) {
+            echo "<script>alert('两次输入密码不同！请重新输入！')</script>";
+        } else {
+            $sql_insert = "insert into user(userName,name,gender,password,phone,userType) values('$userName','$name','$gender','$password','$phone','$userType')";
+            if (mysqli_query($conn, $sql_insert)) {
+                $userName = $_POST['userName'];
+                $name = $_POST['name'];
+                $userType = $_POST['userType'];
+                echo <<<_GOTO_HOMEPAGE_END
+            <form id="registerForm" action="注册成功界面.php" method="GET">
+            <input type="hidden" name="userName" value="$userName">
+            <input type="hidden" name="name" value="$name">
+            <input type="hidden" name="userType" value="$userType">
+            </form>
+            <script type="text/javascript">
+            document.getElementById("registerForm").submit();
+            </script>
+            _GOTO_HOMEPAGE_END;
+            } else {
+                echo "Error: " . $sql_insert . "<br>" . mysqli_error($conn);
+            }
+        }
+    } else {
+
+        echo "<script>alert('用户名.$userName.已经存在!请重新注册')</script>";
+    }
+}
+?>
