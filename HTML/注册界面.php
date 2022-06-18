@@ -78,6 +78,7 @@
         width: 200px;
         border-radius: 10px;
         text-align: center;
+        text-align-last: center;
     }
 
     /* 设置点击没有边框 */
@@ -207,7 +208,7 @@ if (!empty($_POST['userName'])) {
     $phone = $_POST['phone'];
     $userType = $_POST['userType'];
 
-    $sql = "select userName from user where userName = '$userName'";
+    $sql = "select userName from users where userName = '$userName'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     //判断用户名是否存在
@@ -216,21 +217,35 @@ if (!empty($_POST['userName'])) {
         if ($password != $_POST['password1']) {
             echo "<script>alert('两次输入密码不同！请重新输入！')</script>";
         } else {
-            $sql_insert = "insert into user(userName,name,gender,password,phone,userType) values('$userName','$name','$gender','$password','$phone','$userType')";
+            $sql_insert = "insert into users(userName,name,gender,password,phone,userType) values('$userName','$name','$gender','$password','$phone','$userType')";
+            $sql_create = "create table ".$name." (
+                id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                user_id INT(11) NOT NULL COMMENT '用户id',
+                course_id INT(11) NOT NULL UNIQUE COMMENT '课程id',
+                name VARCHAR(255) NOT NULL COMMENT '课程名' COLLATE 'utf8_unicode_ci',
+                classday VARCHAR(32) NOT NULL COMMENT '上课时间（周几）' COLLATE 'utf8_unicode_ci',
+	            classtime TIME NOT NULL COMMENT '上课开始的时间',
+                userType CHAR(1) NOT NULL COMMENT 'S表示学生，T表示老师' COLLATE 'utf8_unicode_ci'
+            )COMMENT='该用户的所有课程' COLLATE='utf8_unicode_ci' ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+            if (mysqli_query($conn, $sql_create)) {
+            } else {
+                echo "Error: " . $sql_create . "<br>" . mysqli_error($conn);
+                exit();
+            }
             if (mysqli_query($conn, $sql_insert)) {
                 $userName = $_POST['userName'];
                 $name = $_POST['name'];
                 $userType = $_POST['userType'];
                 echo <<<_GOTO_HOMEPAGE_END
-            <form id="registerForm" action="注册成功界面.php" method="GET">
-            <input type="hidden" name="userName" value="$userName">
-            <input type="hidden" name="name" value="$name">
-            <input type="hidden" name="userType" value="$userType">
-            </form>
-            <script type="text/javascript">
-            document.getElementById("registerForm").submit();
-            </script>
-            _GOTO_HOMEPAGE_END;
+                <form id="registerForm" action="注册成功界面.php" method="GET">
+                    <input type="hidden" name="userName" value="$userName">
+                    <input type="hidden" name="name" value="$name">
+                    <input type="hidden" name="userType" value="$userType">
+                </form>
+                <script type="text/javascript">
+                document.getElementById("registerForm").submit();
+                </script>
+                _GOTO_HOMEPAGE_END;
             } else {
                 echo "Error: " . $sql_insert . "<br>" . mysqli_error($conn);
             }
@@ -240,4 +255,5 @@ if (!empty($_POST['userName'])) {
         echo "<script>alert('用户名.$userName.已经存在!请重新注册')</script>";
     }
 }
+$conn->close();
 ?>
