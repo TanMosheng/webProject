@@ -28,7 +28,7 @@ $logsuccess = false;
 if (isset($_POST['login'])) {
   $userName = $_POST['userName'];
   $password = $_POST['password'];
-  $sql = "select userName,password from user where userName = '$userName'";
+  $sql = "select userName,password from users where userName = '$userName'";
   $result = mysqli_query($conn, $sql);
   $row = mysqli_fetch_assoc($result);
   if (($userName != $row['userName']) || ($password != $row['password'])) {
@@ -111,14 +111,14 @@ if (isset($_POST['login'])) {
       die("连接失败: " . $conn->connect_error);
     }
     $userName = $_POST['userName'];
-    $sql = "select userName,name,userType from user where userName = '$userName'";
+    $sql = "select userName,name,userType from users where userName = '$userName'";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     $name = $row['name'];
     $userType = $row['userType'];
     echo <<<_GOTO_HOMEPAGE_END
     <form id="loginForm" action="home.php" method="GET">
-      <input type="hidden" name="userName" value="$userName">
+      <input type="hidden" name="userName" value="$userName"> 
       <input type="hidden" name="name" value="$name">
       <input type="hidden" name="userType" value="$userType">
     </form>
