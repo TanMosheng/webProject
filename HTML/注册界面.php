@@ -147,14 +147,14 @@
                     <label>
                         密码：
                     </label>
-                    <input class="in" type="password" name="password" placeholder="请输入密码" required="">
+                    <input class="in" type="password" name="password" minlength="6" maxlength="20" placeholder="请输入密码" required="">
                 </div>
                 <br><br>
                 <div class="item">
                     <label>
                         再次输入密码：
                     </label>
-                    <input class="in" type="password" name="password1" placeholder="请确认密码" required="">
+                    <input class="in" type="password" name="password1" minlength="6" maxlength="20" placeholder="请确认密码" required="">
                 </div>
                 <br><br>
                 <div class="item">
