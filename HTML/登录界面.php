@@ -62,6 +62,8 @@ if (isset($_POST['login'])) {
         </div>
         <div>
           <span><a href="./注册界面.php" class="link">立即注册</a></span>
+          &emsp;
+          <span><a href="./忘记密码界面.php" class="link">忘记密码</a></span>
         </div>
         <input class="btn" type="submit" name="login" value="登录">
         <?php if ($logfail) echo '<div class="err_tip">账号或密码错误，请重试</div>' ?>
@@ -80,6 +82,8 @@ if (isset($_POST['login'])) {
         </div>
         <div>
           <span><a href="./注册界面.php" class="link">立即注册</a></span>
+          &emsp;
+          <span><a href="./忘记密码界面.php" class="link">忘记密码</a></span>
         </div>
         <input class="btn" type="submit" name="login" value="登录">
         <?php if ($logfail) echo '<div class="err_tip">账号或密码错误，请重试</div>' ?>
