@@ -161,7 +161,7 @@
                     <label>
                         电话号码：
                     </label>
-                    <input class="in" type="phone" name="phone" pattern="^(13[0-9]|15[0-9]|18[0-9])([0-9]{8})$" placeholder="请输入11位电话号码">
+                    <input class="in" type="phone" name="phone" pattern="^(13[0-9]|15[0-9]|18[0-9])([0-9]{8})$" placeholder="请输入11位电话号码" required="">
                 </div>
                 <br><br>
                 <div class="item">
@@ -223,6 +223,7 @@ if (!empty($_POST['userName'])) {
                 user_id INT(11) NOT NULL COMMENT '用户id',
                 course_id INT(11) NOT NULL UNIQUE COMMENT '课程id',
                 name VARCHAR(255) NOT NULL COMMENT '课程名' COLLATE 'utf8_unicode_ci',
+                teachername VARCHAR(255) NOT NULL COMMENT '老师名' COLLATE 'utf8_unicode_ci',
                 classday VARCHAR(32) NOT NULL COMMENT '上课时间（周几）' COLLATE 'utf8_unicode_ci',
 	            classtime TIME NOT NULL COMMENT '上课开始的时间',
                 userType CHAR(1) NOT NULL COMMENT 'S表示学生，T表示老师' COLLATE 'utf8_unicode_ci'
