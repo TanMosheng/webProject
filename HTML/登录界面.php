@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>登录注册界面</title>
+  <title>登录界面</title>
   <link rel="stylesheet" href="./styles/登录界面.css">
   <script defer="true" src="./scripts/登录界面切换.js"></script>
 </head>
@@ -52,7 +52,7 @@ if (isset($_POST['login'])) {
 
     <!-- 教师登录框 -->
     <div class="container_form container_signup">
-      <form action="登录界面.php" class="form" id="teacherform" method="post">
+      <form action="登录界面.php" class="form" name="myForm" method="post"">
         <h1 class="form_title">欢迎登录</h1>
         <input type="text" name="userName" placeholder="工号" class="input" required="">
         <input type="password" name="password" placeholder="密码" class="input" required="">
@@ -72,7 +72,7 @@ if (isset($_POST['login'])) {
 
     <!-- 学生登录框 -->
     <div class="container_form container_signin">
-      <form action="登录界面.php" class="form" id="studentform" method="post">
+      <form action="登录界面.php" class="form" name="myForm" method="post">
         <h1 class="form_title">欢迎登录</h1>
         <input type="text" name="userName" placeholder="学号" class="input" required="">
         <input type="password" name="password" placeholder="密码" class="input" required="">
@@ -120,6 +120,9 @@ if (isset($_POST['login'])) {
     $row = mysqli_fetch_assoc($result);
     $name = $row['name'];
     $userType = $row['userType'];
+    $_SESSION['name'] = $name;
+    $_SESSION['userName'] = $userName;
+    $_SESSION['userType'] = $userType;
     echo <<<_GOTO_HOMEPAGE_END
     <form id="loginForm" action="home.php" method="GET">
       <input type="hidden" name="userName" value="$userName"> 
@@ -130,8 +133,57 @@ if (isset($_POST['login'])) {
       document.getElementById("loginForm").submit();
     </script>
 _GOTO_HOMEPAGE_END;
+    $conn->close();
   }
   ?>
+  <script>
+    window.onload = function() {
+      var oForm = document.getElementById('myForm');
+      var oUser = document.getElementById('userName');
+      var oPswd = document.getElementById('password');
+      var oRemember = document.getElementById('rup');
+      if(getCookie('userName')&&getCookie('password'))
+      {
+        oUser.value = getCookie('userName');
+        oPswd.value = getCookie('password');
+        oRemember.checked = true;
+      }
+      oRemember.onchange = function(){
+        if(!this.checked)
+        {
+          delCookie('userName');
+          delCookie('password');
+        }
+      };
+      oForm.onsubmit = function() {
+        if(rup.checked)
+        {
+          setcookie('userName', oUser.value,7);
+          setcookie('password', oPswd.value,7);
+        }
+      };
+    };
+    function setCookie(name,value,day)
+    {
+      var date = new Date();
+      date.setDate(date.getDate()+day);
+      document.cookie = name + '=' + value + ';expires=' + date;
+    }
+    function getCookie(name)
+    {
+      var reg = RegExp(name + '=([^;]+)');
+      var arr = document.cookie.match(reg);
+      if(arr){
+        return arr[1];
+      }
+      else{
+        return '';
+      }
+    }
+    function delCookie(name){
+      setCookie(name,null,-1);
+    }
+  </script>
 </body>
 
 </html>
